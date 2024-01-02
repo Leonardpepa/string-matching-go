@@ -27,9 +27,12 @@ Release date: May 1, 1994 [eBook #132]
 Language: English
 `
 
-	pattern := "located"
+	pattern := "recently"
 
 	s := simpleStringMatching(input, pattern)
+	fmt.Println(input[s : s+len(pattern)])
+
+	s = simpleStringMatchingV2(input, pattern)
 	fmt.Println(input[s : s+len(pattern)])
 }
 
@@ -43,6 +46,30 @@ func simpleStringMatching(input string, pattern string) int {
 	for s := 0; s < n-m; s++ {
 		if pattern == input[s:s+m] {
 			return s
+		}
+	}
+
+	return -1
+}
+
+func simpleStringMatchingV2(input string, pattern string) int {
+	n := len(input)
+	m := len(pattern)
+
+	if n < m {
+		return -1
+	}
+	for s := 0; s < n-m; s++ {
+		count := 0
+		for i:=s; i<s+m; i++{
+			if pattern[count] == input[i] {
+				count++
+			}else{
+				break
+			}
+			if count == m {
+				return s
+			}
 		}
 	}
 

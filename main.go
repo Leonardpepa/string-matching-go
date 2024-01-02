@@ -32,7 +32,7 @@ Language: English
 	s := simpleStringMatching(input, pattern)
 	fmt.Println(input[s : s+len(pattern)])
 
-	s = simpleStringMatchingV2(input, pattern)
+	s = simpleStringMatchingV2(input, "English")
 	fmt.Println(input[s : s+len(pattern)])
 }
 
@@ -61,10 +61,10 @@ func simpleStringMatchingV2(input string, pattern string) int {
 	}
 	for s := 0; s < n-m; s++ {
 		count := 0
-		for i:=s; i<s+m; i++{
+		for i := s; i < s+m; i++ {
 			if pattern[count] == input[i] {
 				count++
-			}else{
+			} else {
 				break
 			}
 			if count == m {

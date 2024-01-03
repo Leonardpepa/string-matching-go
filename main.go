@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math"
 )
 
@@ -30,8 +31,12 @@ Release date: May 1, 1994 [eBook #132]
 Language: English
 `
 
-	pattern := "recently"
+	pattern := "[eBook #132]"
 	s := RabinKarp(input, pattern, 256, 13)
+	//s := bruteForce.MatchPattern(input, pattern)
+	if s == -1 {
+		log.Fatal("Not found: ", s)
+	}
 	fmt.Println(input[s : s+len(pattern)])
 }
 

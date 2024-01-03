@@ -1,6 +1,6 @@
-package internal
+package bruteForce
 
-func BruteForceSearch(input string, pattern string) int {
+func MatchPattern(input string, pattern string) int {
 	n := len(input)
 	m := len(pattern)
 
@@ -16,7 +16,7 @@ func BruteForceSearch(input string, pattern string) int {
 	return -1
 }
 
-func BruteForceSearchV2(input string, pattern string) int {
+func MatchPatternV2(input string, pattern string) int {
 	n := len(input)
 	m := len(pattern)
 

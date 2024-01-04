@@ -35,7 +35,7 @@ Language: English
 
 	//indexes, err := bruteForce.MatchString(input, pattern)
 
-	indexes, err := rabinKarp.MatchString(input, pattern, 256, 101)
+	indexes, err := rabinKarp.MatchString(input, pattern, 256, 251)
 
 	if err != nil {
 		log.Fatal(err)

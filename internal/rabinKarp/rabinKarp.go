@@ -2,7 +2,7 @@ package rabinKarp
 
 import (
 	"errors"
-	math "string-matching/internal/util"
+	"string-matching/internal/util"
 )
 
 func MatchString(input string, pattern string, d int, q int) ([]int, error) {
@@ -16,7 +16,7 @@ func MatchString(input string, pattern string, d int, q int) ([]int, error) {
 	}
 
 	// d ^ m-1 mod q
-	h, err := math.PowMod(d, m-1, q)
+	h, err := modulo.PowMod(d, m-1, q)
 
 	if err != nil {
 		return nil, err

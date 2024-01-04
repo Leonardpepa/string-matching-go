@@ -1,4 +1,4 @@
-package math
+package modulo
 
 import (
 	"errors"

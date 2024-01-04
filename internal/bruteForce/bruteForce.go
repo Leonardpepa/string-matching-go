@@ -1,19 +1,26 @@
 package bruteForce
 
-func MatchPattern(input string, pattern string) int {
+import "errors"
+
+func MatchString(input string, pattern string) ([]int, error) {
+	indexes := make([]int, 0)
 	n := len(input)
 	m := len(pattern)
 
 	if n < m {
-		return -1
+		return nil, errors.New("pattern needs to be smaller or equal to input text")
 	}
 	for s := 0; s < n-m; s++ {
 		if pattern == input[s:s+m] {
-			return s
+			indexes = append(indexes, s)
 		}
 	}
 
-	return -1
+	if len(indexes) == 0 {
+		return nil, errors.New("match not found")
+	}
+
+	return indexes, nil
 }
 
 func MatchPatternV2(input string, pattern string) int {

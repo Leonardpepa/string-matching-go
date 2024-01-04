@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"math"
+	"string-matching/internal/bruteForce"
 )
 
 func main() {
@@ -31,46 +31,28 @@ Release date: May 1, 1994 [eBook #132]
 Language: English
 `
 
-	pattern := "[eBook #132]"
-	s := RabinKarp(input, pattern, 256, 13)
-	//s := bruteForce.MatchPattern(input, pattern)
-	if s == -1 {
-		log.Fatal("Not found: ", s)
+	//pattern := "[eBook #132]"
+	pattern := `at www.gutenberg.org. If you are not located in the United States,
+you will have to check the laws of the country where you are located
+before using this eBook.
+
+Title: The Art of War
+
+
+Author: active 6th century B.C. Sunzi
+`
+
+	indexes, err := bruteForce.MatchString(input, pattern)
+
+	if err != nil {
+		log.Fatal(err)
 	}
-	fmt.Println(input[s : s+len(pattern)])
+
+	printMatches(indexes, input, len(pattern))
 }
 
-func RabinKarp(input string, pattern string, d int, q int) int {
-	n := len(input)
-	m := len(pattern)
-
-	h := int(math.Pow(float64(d), float64(m-1))) % q
-
-	p := 0
-	t := 0
-
-	for i := 0; i < m; i++ {
-		p = (d*p + int(pattern[i])) % q
-		t = (d*t + int(input[i])) % q
+func printMatches(indexes []int, input string, patternLen int) {
+	for _, val := range indexes {
+		fmt.Println(input[val : val+patternLen])
 	}
-
-	for s := 0; s < n-m; s++ {
-
-		if p == t {
-			if pattern == input[s:s+m] {
-				return s
-			}
-		}
-
-		if s < n-m {
-			t = (d*(t-int(input[s])*h) + int(input[s+m])) % q
-
-			for t < 0 {
-				t = t + q
-			}
-		}
-
-	}
-
-	return -1
 }

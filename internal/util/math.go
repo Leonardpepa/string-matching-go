@@ -1,10 +1,18 @@
 package math
 
 import (
+	"errors"
 	"slices"
 )
 
 func PowMod(base int, exponent int, mod int) (int, error) {
+	if base < 0 || exponent < 0 {
+		return 0, errors.New("base and exponent need to be greater than 0")
+	}
+
+	if mod <= 0 {
+		return 0, errors.New("modulo need to be positive")
+	}
 
 	d := 1
 	bin := toBinaryArray(exponent)

@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"string-matching/internal/bruteForce"
+	"string-matching/internal/rabinKarp"
 )
 
 func main() {
@@ -31,18 +31,11 @@ Release date: May 1, 1994 [eBook #132]
 Language: English
 `
 
-	//pattern := "[eBook #132]"
-	pattern := `at www.gutenberg.org. If you are not located in the United States,
-you will have to check the laws of the country where you are located
-before using this eBook.
+	pattern := "[eBook #132]"
 
-Title: The Art of War
+	//indexes, err := bruteForce.MatchString(input, pattern)
 
-
-Author: active 6th century B.C. Sunzi
-`
-
-	indexes, err := bruteForce.MatchString(input, pattern)
+	indexes, err := rabinKarp.MatchString(input, pattern, 256, 101)
 
 	if err != nil {
 		log.Fatal(err)

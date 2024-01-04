@@ -1,12 +1,24 @@
 package rabinKarp
 
-import "math"
+import (
+	"errors"
+)
 
-func MatchString(input string, pattern string, d int, q int) int {
+func MatchString(input string, pattern string, d int, q int) ([]int, error) {
+	indexes := make([]int, 0)
+
 	n := len(input)
 	m := len(pattern)
 
-	h := int(math.Pow(float64(d), float64(m-1))) % q
+	if n < m {
+		return nil, errors.New("pattern needs to be smaller or equal to input text")
+	}
+
+	h := 1
+	// h ^ m-1 mod q
+	for i := 0; i < m-1; i++ {
+		h = (h * d) % q
+	}
 
 	p := 0
 	t := 0
@@ -18,23 +30,22 @@ func MatchString(input string, pattern string, d int, q int) int {
 
 	for s := 0; s <= n-m; s++ {
 
-		if p == t {
-			if pattern == input[s:s+m] {
-				return s
-			}
+		if p == t && pattern == input[s:s+m] {
+			indexes = append(indexes, s)
 		}
 
 		if s < n-m {
-			t = d*(t-int(input[s])*h) + int(input[s+m])
-			// mod q
-			t = t % q
+			t = (d*(t-int(input[s])*h) + int(input[s+m])) % q
 
 			if t < 0 {
-				t = t + q
+				t += q
 			}
 		}
 
 	}
 
-	return -1
+	if len(indexes) == 0 {
+		return nil, errors.New("match not found")
+	}
+	return indexes, nil
 }

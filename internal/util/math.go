@@ -2,10 +2,14 @@ package math
 
 import (
 	"errors"
-	"slices"
 )
 
 func PowMod(base int, exponent int, mod int) (int, error) {
+
+	if mod == 1 {
+		return 0, nil
+	}
+
 	if base < 0 || exponent < 0 {
 		return 0, errors.New("base and exponent need to be greater than 0")
 	}
@@ -14,28 +18,16 @@ func PowMod(base int, exponent int, mod int) (int, error) {
 		return 0, errors.New("modulo need to be positive")
 	}
 
-	d := 1
-	bin := toBinaryArray(exponent)
-
-	for _, val := range bin {
-		d = (d * d) % mod
-
-		if val == 1 {
-			d = (d * base) % mod
+	base = base % mod
+	result := 1
+	for exponent > 0 {
+		if exponent%2 == 1 {
+			result = (result * base) % mod
 		}
+		// exponent/2
+		exponent = exponent >> 1
+		base = (base * base) % mod
 	}
 
-	return d, nil
-}
-
-func toBinaryArray(num int) []int8 {
-	bin := make([]int8, 0)
-
-	for num > 0 {
-		bin = append(bin, int8(num%2))
-		num = num / 2
-	}
-
-	slices.Reverse(bin)
-	return bin
+	return result, nil
 }

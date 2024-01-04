@@ -2,6 +2,7 @@ package rabinKarp
 
 import (
 	"errors"
+	math "string-matching/internal/util"
 )
 
 func MatchString(input string, pattern string, d int, q int) ([]int, error) {
@@ -14,10 +15,11 @@ func MatchString(input string, pattern string, d int, q int) ([]int, error) {
 		return nil, errors.New("pattern needs to be smaller or equal to input text")
 	}
 
-	h := 1
-	// h ^ m-1 mod q
-	for i := 0; i < m-1; i++ {
-		h = (h * d) % q
+	// d ^ m-1 mod q
+	h, err := math.PowMod(d, m-1, q)
+
+	if err != nil {
+		return nil, err
 	}
 
 	p := 0

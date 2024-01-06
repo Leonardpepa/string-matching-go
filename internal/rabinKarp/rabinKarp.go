@@ -1,7 +1,7 @@
 package rabinKarp
 
 import (
-	"errors"
+	"string-matching/internal/shared"
 	"string-matching/internal/util"
 )
 
@@ -12,7 +12,7 @@ func MatchString(input string, pattern string, d int, q int) ([]int, error) {
 	m := len(pattern)
 
 	if n < m {
-		return nil, errors.New("pattern needs to be smaller or equal to input text")
+		return nil, shared.BiggerPatternThanText
 	}
 
 	// d ^ m-1 mod q
@@ -47,7 +47,7 @@ func MatchString(input string, pattern string, d int, q int) ([]int, error) {
 	}
 
 	if len(indexes) == 0 {
-		return nil, errors.New("match not found")
+		return nil, shared.NotFoundError
 	}
 	return indexes, nil
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"string-matching/internal/DFA"
 )
 
@@ -16,8 +17,11 @@ with this eBook or online at www.gutenberg.net
 
 	pattern := "utenberg"
 
-	indexes := DFA.MatchString(input, pattern)
+	indexes, err := DFA.MatchString(input, pattern)
 
+	if err != nil {
+		log.Fatal(err)
+	}
 	printMatches(indexes, input, len(pattern))
 }
 

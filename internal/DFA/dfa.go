@@ -1,24 +1,25 @@
 package DFA
 
 import (
+	"string-matching/internal/shared"
 	"strings"
 )
 
-type DFA struct {
+type dfa struct {
 	delta   []map[byte]int
 	input   string
 	pattern string
 }
 
-func InitDFA(input string, pattern string) *DFA {
-	return &DFA{
+func initDFA(input string, pattern string) *dfa {
+	return &dfa{
 		input:   input,
 		pattern: pattern,
 		delta:   make([]map[byte]int, 0, len(pattern)),
 	}
 }
 
-func (dfa *DFA) CalcTransitionTable() {
+func (dfa *dfa) calcTransitionTable() {
 	m := len(dfa.pattern)
 
 	for q := 0; q <= m; q++ {
@@ -45,11 +46,11 @@ func (dfa *DFA) CalcTransitionTable() {
 	}
 }
 
-func MatchString(input string, pattern string) []int {
+func MatchString(input string, pattern string) ([]int, error) {
 	indexes := make([]int, 0)
-	dfa := InitDFA(input, pattern)
+	dfa := initDFA(input, pattern)
 
-	dfa.CalcTransitionTable()
+	dfa.calcTransitionTable()
 
 	n := len(input)
 	m := len(pattern)
@@ -62,5 +63,8 @@ func MatchString(input string, pattern string) []int {
 		}
 	}
 
-	return indexes
+	if len(indexes) == 0 {
+		return nil, shared.NotFoundError
+	}
+	return indexes, nil
 }

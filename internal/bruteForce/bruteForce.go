@@ -1,6 +1,8 @@
 package bruteForce
 
-import "errors"
+import (
+	"string-matching/internal/shared"
+)
 
 func MatchString(input string, pattern string) ([]int, error) {
 	indexes := make([]int, 0)
@@ -8,7 +10,7 @@ func MatchString(input string, pattern string) ([]int, error) {
 	m := len(pattern)
 
 	if n < m {
-		return nil, errors.New("pattern needs to be smaller or equal to input text")
+		return nil, shared.BiggerPatternThanText
 	}
 	for s := 0; s < n-m; s++ {
 		if pattern == input[s:s+m] {
@@ -17,18 +19,20 @@ func MatchString(input string, pattern string) ([]int, error) {
 	}
 
 	if len(indexes) == 0 {
-		return nil, errors.New("match not found")
+		return nil, shared.NotFoundError
 	}
 
 	return indexes, nil
 }
 
-func MatchPatternV2(input string, pattern string) int {
+func MatchPatternV2(input string, pattern string) ([]int, error) {
+	indexes := make([]int, 0)
+
 	n := len(input)
 	m := len(pattern)
 
 	if n < m {
-		return -1
+		return nil, shared.BiggerPatternThanText
 	}
 	for s := 0; s < n-m; s++ {
 		count := 0
@@ -39,10 +43,14 @@ func MatchPatternV2(input string, pattern string) int {
 				break
 			}
 			if count == m {
-				return s
+				indexes = append(indexes, s)
 			}
 		}
 	}
 
-	return -1
+	if len(indexes) == 0 {
+		return nil, shared.NotFoundError
+	}
+
+	return indexes, nil
 }

@@ -5,9 +5,11 @@ import (
 	"string-matching/internal/util"
 )
 
-func MatchString(input string, pattern string, d int, q int) ([]int, error) {
+func MatchString(input string, pattern string) ([]int, error) {
 	indexes := make([]int, 0)
 
+	d := 256
+	q := 257
 	n := len(input)
 	m := len(pattern)
 

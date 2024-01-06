@@ -25,7 +25,7 @@ func MatchString(input string, pattern string) ([]int, error) {
 	return indexes, nil
 }
 
-func MatchPatternV2(input string, pattern string) ([]int, error) {
+func MatchStringV2(input string, pattern string) ([]int, error) {
 	indexes := make([]int, 0)
 
 	n := len(input)

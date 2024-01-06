@@ -6,10 +6,15 @@ import (
 )
 
 func main() {
+	input := `Project Gutenberg's International Short Stories: French, by Various
 
-	input := `The Project Gutenberg eBook of The Art of War`
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.net
+`
 
-	pattern := "eBook"
+	pattern := "utenberg"
 
 	indexes := DFA.MatchString(input, pattern)
 
@@ -18,6 +23,6 @@ func main() {
 
 func printMatches(indexes []int, input string, patternLen int) {
 	for _, val := range indexes {
-		fmt.Println(input[val : val+patternLen])
+		fmt.Printf("found at %d, %s\n", val, input[val:val+patternLen])
 	}
 }

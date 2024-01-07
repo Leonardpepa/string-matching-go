@@ -16,7 +16,7 @@ in [Introduction to algorithms](https://dl.ebooksworld.ir/books/Introduction.to.
 * DFA (Deterministic finite automaton)
 * Knuth Morris Pratt
 
-### Problem Definition
+### String Matching Definition
 The problem of finding occurrence(s) of a pattern string within another string or body of text.
 The algorithm returns an array of the first index for every occurrence in the text
 

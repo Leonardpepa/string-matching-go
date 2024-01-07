@@ -47,6 +47,14 @@ func (dfa *dfa) calcTransitionTable() {
 }
 
 func MatchString(input string, pattern string) ([]int, error) {
+	if pattern == "" {
+		return nil, shared.EmptyPattern
+	}
+
+	if input == "" {
+		return nil, shared.EmptyInputText
+	}
+
 	indexes := make([]int, 0)
 	dfa := initDFA(input, pattern)
 
@@ -55,6 +63,10 @@ func MatchString(input string, pattern string) ([]int, error) {
 	n := len(input)
 	m := len(pattern)
 	q := 0
+
+	if n < m {
+		return nil, shared.BiggerPatternThanText
+	}
 
 	for i := 0; i < n; i++ {
 		q = dfa.delta[q][input[i]]

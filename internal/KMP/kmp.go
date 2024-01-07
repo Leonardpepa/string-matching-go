@@ -28,6 +28,14 @@ func computePrefix(pattern string) []int {
 }
 
 func MatchString(input string, pattern string) ([]int, error) {
+	if pattern == "" {
+		return nil, shared.EmptyPattern
+	}
+
+	if input == "" {
+		return nil, shared.EmptyInputText
+	}
+
 	indexes := make([]int, 0)
 
 	p := computePrefix(pattern)
@@ -35,6 +43,10 @@ func MatchString(input string, pattern string) ([]int, error) {
 
 	n := len(input)
 	m := len(pattern)
+
+	if n < m {
+		return nil, shared.BiggerPatternThanText
+	}
 
 	for i := 0; i < n; i++ {
 		for q > 0 && pattern[q] != input[i] {

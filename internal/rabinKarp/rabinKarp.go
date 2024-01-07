@@ -6,6 +6,14 @@ import (
 )
 
 func MatchString(input string, pattern string) ([]int, error) {
+	if pattern == "" {
+		return nil, shared.EmptyPattern
+	}
+
+	if input == "" {
+		return nil, shared.EmptyInputText
+	}
+
 	indexes := make([]int, 0)
 
 	d := 256

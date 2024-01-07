@@ -5,6 +5,14 @@ import (
 )
 
 func MatchString(input string, pattern string) ([]int, error) {
+	if pattern == "" {
+		return nil, shared.EmptyPattern
+	}
+
+	if input == "" {
+		return nil, shared.EmptyInputText
+	}
+
 	indexes := make([]int, 0)
 	n := len(input)
 	m := len(pattern)
@@ -12,7 +20,8 @@ func MatchString(input string, pattern string) ([]int, error) {
 	if n < m {
 		return nil, shared.BiggerPatternThanText
 	}
-	for s := 0; s < n-m; s++ {
+
+	for s := 0; s <= n-m; s++ {
 		if pattern == input[s:s+m] {
 			indexes = append(indexes, s)
 		}
@@ -26,6 +35,14 @@ func MatchString(input string, pattern string) ([]int, error) {
 }
 
 func MatchStringV2(input string, pattern string) ([]int, error) {
+	if pattern == "" {
+		return nil, shared.EmptyPattern
+	}
+
+	if input == "" {
+		return nil, shared.EmptyInputText
+	}
+
 	indexes := make([]int, 0)
 
 	n := len(input)
@@ -34,7 +51,7 @@ func MatchStringV2(input string, pattern string) ([]int, error) {
 	if n < m {
 		return nil, shared.BiggerPatternThanText
 	}
-	for s := 0; s < n-m; s++ {
+	for s := 0; s <= n-m; s++ {
 		count := 0
 		for i := s; i < s+m; i++ {
 			if pattern[count] == input[i] {

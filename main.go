@@ -15,7 +15,7 @@ re-use it under the terms of the Project Gutenberg License included
 with this eBook or online at www.gutenberg.net
 `
 
-	pattern := "the"
+	pattern := input
 
 	indexes, err := KMP.MatchString(input, pattern)
 

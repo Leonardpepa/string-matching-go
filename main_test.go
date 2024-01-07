@@ -2,6 +2,7 @@ package main
 
 import (
 	"string-matching/internal/DFA"
+	"string-matching/internal/KMP"
 	"string-matching/internal/bruteForce"
 	"string-matching/internal/rabinKarp"
 	"testing"
@@ -63,6 +64,14 @@ func TestDFA(t *testing.T) {
 	t.Run("DFA approach", func(t *testing.T) {
 		for _, val := range cases {
 			shouldSucceed(t, input, val, DFA.MatchString)
+		}
+	})
+}
+
+func TestKMP(t *testing.T) {
+	t.Run("KMP approach", func(t *testing.T) {
+		for _, val := range cases {
+			shouldSucceed(t, input, val, KMP.MatchString)
 		}
 	})
 }

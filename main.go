@@ -15,18 +15,19 @@ re-use it under the terms of the Project Gutenberg License included
 with this eBook or online at www.gutenberg.net
 `
 
-	pattern := input
+	pattern := "Gutenberg"
 
 	indexes, err := KMP.MatchString(input, pattern)
 
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	printMatches(indexes, input, len(pattern))
 }
 
 func printMatches(indexes []int, input string, patternLen int) {
-	for _, val := range indexes {
-		fmt.Printf("found at %d, %s\n", val, input[val:val+patternLen])
+	for _, index := range indexes {
+		fmt.Printf("found at %d, %s\n", index, input[index:index+patternLen])
 	}
 }

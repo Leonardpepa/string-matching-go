@@ -25,6 +25,13 @@ func MatchString(input string, pattern string) ([]int, error) {
 		return nil, shared.BiggerPatternThanText
 	}
 
+	if n == m {
+		if input == pattern {
+			return []int{0}, nil
+		}
+		return nil, shared.NotFoundError
+	}
+
 	// d ^ m-1 mod prime
 	h, err := modulo.PowMod(d, m-1, prime)
 

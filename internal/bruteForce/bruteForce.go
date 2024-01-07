@@ -21,6 +21,13 @@ func MatchString(input string, pattern string) ([]int, error) {
 		return nil, shared.BiggerPatternThanText
 	}
 
+	if n == m {
+		if input == pattern {
+			return []int{0}, nil
+		}
+		return nil, shared.NotFoundError
+	}
+
 	for s := 0; s <= n-m; s++ {
 		if pattern == input[s:s+m] {
 			indexes = append(indexes, s)
@@ -51,6 +58,14 @@ func MatchStringV2(input string, pattern string) ([]int, error) {
 	if n < m {
 		return nil, shared.BiggerPatternThanText
 	}
+
+	if n == m {
+		if input == pattern {
+			return []int{0}, nil
+		}
+		return nil, shared.NotFoundError
+	}
+
 	for s := 0; s <= n-m; s++ {
 		count := 0
 		for i := s; i < s+m; i++ {

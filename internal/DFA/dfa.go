@@ -68,6 +68,13 @@ func MatchString(input string, pattern string) ([]int, error) {
 		return nil, shared.BiggerPatternThanText
 	}
 
+	if n == m {
+		if input == pattern {
+			return []int{0}, nil
+		}
+		return nil, shared.NotFoundError
+	}
+
 	for i := 0; i < n; i++ {
 		q = dfa.delta[q][input[i]]
 		if q == m {

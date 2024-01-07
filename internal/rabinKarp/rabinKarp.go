@@ -17,7 +17,7 @@ func MatchString(input string, pattern string) ([]int, error) {
 	indexes := make([]int, 0)
 
 	d := 256
-	q := 257
+	prime := 16777619
 	n := len(input)
 	m := len(pattern)
 
@@ -25,8 +25,8 @@ func MatchString(input string, pattern string) ([]int, error) {
 		return nil, shared.BiggerPatternThanText
 	}
 
-	// d ^ m-1 mod q
-	h, err := modulo.PowMod(d, m-1, q)
+	// d ^ m-1 mod prime
+	h, err := modulo.PowMod(d, m-1, prime)
 
 	if err != nil {
 		return nil, err
@@ -36,8 +36,8 @@ func MatchString(input string, pattern string) ([]int, error) {
 	t := 0
 
 	for i := 0; i < m; i++ {
-		p = (d*p + int(pattern[i])) % q
-		t = (d*t + int(input[i])) % q
+		p = (d*p + int(pattern[i])) % prime
+		t = (d*t + int(input[i])) % prime
 	}
 
 	for s := 0; s <= n-m; s++ {
@@ -47,10 +47,10 @@ func MatchString(input string, pattern string) ([]int, error) {
 		}
 
 		if s < n-m {
-			t = (d*(t-int(input[s])*h) + int(input[s+m])) % q
+			t = (d*(t-int(input[s])*h) + int(input[s+m])) % prime
 
 			if t < 0 {
-				t += q
+				t += prime
 			}
 		}
 

@@ -19,6 +19,7 @@ in [Introduction to algorithms](https://dl.ebooksworld.ir/books/Introduction.to.
 ## Time Complexity
  * n = length of the input text
  * m = length of the pattern
+ * This table shows the worst case time
 <table>
   <tr>
     <th>Algorithms</th>

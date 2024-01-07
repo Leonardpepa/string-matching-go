@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"string-matching/internal/DFA"
+	"string-matching/internal/KMP"
 )
 
 func main() {
@@ -15,9 +15,9 @@ re-use it under the terms of the Project Gutenberg License included
 with this eBook or online at www.gutenberg.net
 `
 
-	pattern := "utenberg"
+	pattern := "the"
 
-	indexes, err := DFA.MatchString(input, pattern)
+	indexes, err := KMP.MatchString(input, pattern)
 
 	if err != nil {
 		log.Fatal(err)

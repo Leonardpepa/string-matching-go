@@ -27,21 +27,21 @@ func computePrefix(pattern string) []int {
 	return p
 }
 
-func MatchString(T string, P string) ([]int, error) {
+func MatchString(input string, pattern string) ([]int, error) {
 	indexes := make([]int, 0)
 
-	p := computePrefix(P)
+	p := computePrefix(pattern)
 	q := 0
 
-	n := len(T)
-	m := len(P)
+	n := len(input)
+	m := len(pattern)
 
 	for i := 0; i < n; i++ {
-		for q > 0 && P[q] != T[i] {
+		for q > 0 && pattern[q] != input[i] {
 			q = p[q-1]
 		}
 
-		if P[q] == T[i] {
+		if pattern[q] == input[i] {
 			q += 1
 		}
 

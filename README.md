@@ -16,6 +16,37 @@ in [Introduction to algorithms](https://dl.ebooksworld.ir/books/Introduction.to.
 * DFA (Deterministic finite automaton)
 * Knuth Morris Pratt
 
+## Time Complexity
+ * n = length of the input text
+ * m = length of the pattern
+<table>
+  <tr>
+    <th>Algorithms</th>
+    <th>Preprocessing time</th>
+    <th>Matching time</th>
+  </tr>
+  <tr>
+    <td>Brute Force</td>
+    <td>0</td>
+    <td>Ο((n - m + 1)m)</td>
+  </tr>
+<tr>
+    <td>Rabin Karp</td>
+    <td>Θ(m)</td>
+    <td>Ο((n - m + 1)m)</td>
+  </tr>
+<tr>
+    <td>DFA</td>
+    <td>Ο(m |Σ|)</td>
+    <td>Θ(n)</td>
+  </tr>
+<tr>
+    <td>Knuth Morris Pratt</td>
+    <td>Θ(m)</td>
+    <td>Θ(n)</td>
+  </tr>
+</table>
+
 ### String Matching Definition
 The problem of finding occurrence(s) of a pattern string within another string or body of text.
 The algorithm returns an array of the first index for every occurrence in the text

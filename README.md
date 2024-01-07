@@ -101,5 +101,5 @@ found at 244, Gutenberg
 1. Clone the repo ```git clone https://github.com/Leonardpepa/string-matching-go.git```
 2. Build ```go build```
 3. run on windows```string-matching.exe```
-4. run on linux ```./string-matching.exe```
+4. run on linux ```./string-matching```
 5. run tests ```go test```
